@@ -1,0 +1,170 @@
+{
+  "maya": "2025",
+  "original": "Maya 2023.3 encrypted original",
+  "tolerance": 0.0001,
+  "cases": [
+    {
+      "case": "scale-2.5",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "fractional-delay",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "ignore-first",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "axis-z",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "loop-offset",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "loop-physics",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "direct-rotation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 1.0123021605589884e-07
+    },
+    {
+      "case": "direct-translation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 1.0658141036401503e-14,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "physics-2-overshoot-1",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "physics-9-overshoot-5",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "cus-x-offset",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "cus-y-offset",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "cus-z-offset",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "cus-x-physics",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "cus-y-physics",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "cus-z-physics",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "locked-axis",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "custom-multi",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "two-chains",
+      "frames": 41,
+      "controls": 8,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "offset-rotation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "offset-translation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "physics-rotation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "physics-translation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 0.0
+    }
+  ],
+  "maximum_translate_error_cm": 1.0658141036401503e-14,
+  "maximum_rotate_error_degrees": 1.0123021605589884e-07
+}

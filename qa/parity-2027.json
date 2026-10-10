@@ -1,0 +1,170 @@
+{
+  "maya": "2027",
+  "original": "Maya 2023.3 encrypted original",
+  "tolerance": 0.0001,
+  "cases": [
+    {
+      "case": "scale-2.5",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 1.7621459846850485e-12
+    },
+    {
+      "case": "fractional-delay",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 1.5627499294623703e-12
+    },
+    {
+      "case": "ignore-first",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 2.078337502098293e-13
+    },
+    {
+      "case": "axis-z",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 1.2523315717771766e-13
+    },
+    {
+      "case": "loop-offset",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 1.9895196601282805e-13
+    },
+    {
+      "case": "loop-physics",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 0.0
+    },
+    {
+      "case": "direct-rotation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 1.0123021605589884e-07
+    },
+    {
+      "case": "direct-translation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 1.0658141036401503e-14,
+      "rotation_error_degrees": 7.105427357601002e-15
+    },
+    {
+      "case": "physics-2-overshoot-1",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 2.6132429553626935e-12
+    },
+    {
+      "case": "physics-9-overshoot-5",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 4.214406601477094e-13
+    },
+    {
+      "case": "cus-x-offset",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 7.993605777301127e-14
+    },
+    {
+      "case": "cus-y-offset",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 1.4654943925052066e-13
+    },
+    {
+      "case": "cus-z-offset",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 6.661338147750939e-14
+    },
+    {
+      "case": "cus-x-physics",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 4.618527782440651e-14
+    },
+    {
+      "case": "cus-y-physics",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 6.838973831690964e-14
+    },
+    {
+      "case": "cus-z-physics",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 8.348877145181177e-14
+    },
+    {
+      "case": "locked-axis",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 1.2079226507921703e-13
+    },
+    {
+      "case": "custom-multi",
+      "frames": 41,
+      "controls": 1,
+      "translation_error_cm": 0.0,
+      "rotation_error_degrees": 6.661338147750939e-14
+    },
+    {
+      "case": "two-chains",
+      "frames": 41,
+      "controls": 8,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 1.3500311979441904e-13
+    },
+    {
+      "case": "offset-rotation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 1.2168044349891716e-13
+    },
+    {
+      "case": "offset-translation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-15,
+      "rotation_error_degrees": 7.105427357601002e-15
+    },
+    {
+      "case": "physics-rotation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 8.881784197001252e-16,
+      "rotation_error_degrees": 3.9523939676655573e-13
+    },
+    {
+      "case": "physics-translation",
+      "frames": 41,
+      "controls": 4,
+      "translation_error_cm": 5.329070518200751e-15,
+      "rotation_error_degrees": 7.105427357601002e-15
+    }
+  ],
+  "maximum_translate_error_cm": 1.0658141036401503e-14,
+  "maximum_rotate_error_degrees": 1.0123021605589884e-07
+}

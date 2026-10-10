@@ -1,0 +1,12 @@
+{
+  "maya": "2027",
+  "passed": true,
+  "checks": [
+    "2023 UI states, 23 golden motion cases, undo and existing dynamics",
+    "real Create button matches all four original mode trajectories",
+    "repeat install, backup, one shelf button, one installed window"
+  ],
+  "tests": "test_custom_defaults_to_y_and_preserves_multiple_checks (ui_checks.OriginalUiTests.test_custom_defaults_to_y_and_preserves_multiple_checks) ... ok\ntest_physics_resets_smoothness_and_keeps_ignore_first_enabled (ui_checks.OriginalUiTests.test_physics_resets_smoothness_and_keeps_ignore_first_enabled) ... ok\ntest_translation_resets_axes_and_disables_custom_scale_ignore (ui_checks.OriginalUiTests.test_translation_resets_axes_and_disables_custom_scale_ignore) ... ok\ntest_typed_scale_extends_slider_and_original_minimums (ui_checks.OriginalUiTests.test_typed_scale_extends_slider_and_original_minimums) ... ok\ntest_direct_write_failure_restores_original_scene (test_maya2023_parity.Maya2023ParityTests.test_direct_write_failure_restores_original_scene) ... ok\ntest_original_extended_modes (test_maya2023_parity.Maya2023ParityTests.test_original_extended_modes) ... ok\ntest_original_locked_multi_axis_and_separate_hierarchies (test_maya2023_parity.Maya2023ParityTests.test_original_locked_multi_axis_and_separate_hierarchies) ... ok\ntest_original_offset_rotation (test_maya2023_parity.Maya2023ParityTests.test_original_offset_rotation) ... ok\ntest_original_offset_translation (test_maya2023_parity.Maya2023ParityTests.test_original_offset_translation) ... ok\ntest_original_particle_rotation (test_maya2023_parity.Maya2023ParityTests.test_original_particle_rotation) ... ok\ntest_original_particle_translation (test_maya2023_parity.Maya2023ParityTests.test_original_particle_translation) ... ok\ntest_particle_bake_one_undo_restores_source (test_maya2023_parity.Maya2023ParityTests.test_particle_bake_one_undo_restores_source) ... ok\ntest_particle_bake_preserves_existing_user_solver (test_maya2023_parity.Maya2023ParityTests.test_particle_bake_preserves_existing_user_solver) ... ok\ntest_rotation_preserves_translation_constraint_driver (test_maya2023_parity.Maya2023ParityTests.test_rotation_preserves_translation_constraint_driver) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 57.500s\n\nOK\n",
+  "installed_path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-10-10\\https-chatgpt-com-s-cx-6ac9b902257c819184adcb8118276d9e\\work\\maya-profile-final2027\\2027\\zh_CN\\scripts\\overlap_motion",
+  "shelf_buttons": 1
+}

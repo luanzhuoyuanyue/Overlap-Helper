@@ -1,0 +1,60 @@
+test_update_preserves_existing_package_as_backup (test_install.InstallTests.test_update_preserves_existing_package_as_backup) ... ok
+test_child_world_delay_with_rotating_parent_and_unordered_input (test_maya.MayaTests.test_child_world_delay_with_rotating_parent_and_unordered_input) ... ok
+test_cycle_output_matches_endpoints (test_maya.MayaTests.test_cycle_output_matches_endpoints) ... ok
+test_delayed_world_motion_and_source_curve_survive_mute_and_delete (test_maya.MayaTests.test_delayed_world_motion_and_source_curve_survive_mute_and_delete) ... ok
+test_existing_animation_layer_evaluated_and_preserved (test_maya.MayaTests.test_existing_animation_layer_evaluated_and_preserved) ... ok
+test_frozen_axes_pivots_rotation_order_and_scaled_parent (test_maya.MayaTests.test_frozen_axes_pivots_rotation_order_and_scaled_parent) ... ok
+test_invalid_inputs_do_not_modify_scene (test_maya.MayaTests.test_invalid_inputs_do_not_modify_scene) ... ok
+test_joint_orientation_is_preserved (test_maya.MayaTests.test_joint_orientation_is_preserved) ... ok
+test_layer_has_no_effect_outside_range (test_maya.MayaTests.test_layer_has_no_effect_outside_range) ... ok
+test_locked_or_constrained_channels_fail_before_changes (test_maya.MayaTests.test_locked_or_constrained_channels_fail_before_changes) ... ok
+test_nonuniform_or_mirrored_parent_rejected_without_scene_mutation (test_maya.MayaTests.test_nonuniform_or_mirrored_parent_rejected_without_scene_mutation) ... ok
+test_offset_parent_matrix_and_uniform_scale (test_maya.MayaTests.test_offset_parent_matrix_and_uniform_scale) ... ok
+test_one_undo_restores_scene_and_user_state (test_maya.MayaTests.test_one_undo_restores_scene_and_user_state) ... ����: Overlap Helper
+ok
+test_parent_translation_generates_swing_on_unkeyed_control (test_maya.MayaTests.test_parent_translation_generates_swing_on_unkeyed_control) ... ok
+test_solo_layer_rejected_instead_of_silently_suppressing_output (test_maya.MayaTests.test_solo_layer_rejected_instead_of_silently_suppressing_output) ... ok
+test_write_failure_rolls_back_all_generated_nodes (test_maya.MayaTests.test_write_failure_rolls_back_all_generated_nodes) ... ����: Overlap Helper
+ok
+test_direct_write_failure_restores_original_scene (test_maya2023_parity.Maya2023ParityTests.test_direct_write_failure_restores_original_scene) ... ����: Overlap Helper
+����: Overlap Helper
+ok
+test_original_extended_modes (test_maya2023_parity.Maya2023ParityTests.test_original_extended_modes) ... ok
+test_original_locked_multi_axis_and_separate_hierarchies (test_maya2023_parity.Maya2023ParityTests.test_original_locked_multi_axis_and_separate_hierarchies) ... ok
+test_original_offset_rotation (test_maya2023_parity.Maya2023ParityTests.test_original_offset_rotation) ... ok
+test_original_offset_translation (test_maya2023_parity.Maya2023ParityTests.test_original_offset_translation) ... ok
+test_original_particle_rotation (test_maya2023_parity.Maya2023ParityTests.test_original_particle_rotation) ... ok
+test_original_particle_translation (test_maya2023_parity.Maya2023ParityTests.test_original_particle_translation) ... ok
+test_particle_bake_one_undo_restores_source (test_maya2023_parity.Maya2023ParityTests.test_particle_bake_one_undo_restores_source) ... ����: Overlap Helper
+ok
+test_particle_bake_preserves_existing_user_solver (test_maya2023_parity.Maya2023ParityTests.test_particle_bake_preserves_existing_user_solver) ... ok
+test_rotation_preserves_translation_constraint_driver (test_maya2023_parity.Maya2023ParityTests.test_rotation_preserves_translation_constraint_driver) ... ok
+test_axis_filter_leaves_locked_unselected_channel_untouched (test_overlap.OverlapTests.test_axis_filter_leaves_locked_unselected_channel_untouched) ... ok
+test_create_reads_current_play_range_and_selection (test_overlap.OverlapTests.test_create_reads_current_play_range_and_selection) ... ok
+test_custom_offset_axis_exposes_a_new_rotation_axis (test_overlap.OverlapTests.test_custom_offset_axis_exposes_a_new_rotation_axis) ... ok
+test_direct_bake_creates_no_layer_and_one_undo_restores_curve (test_overlap.OverlapTests.test_direct_bake_creates_no_layer_and_one_undo_restores_curve) ... ����: Overlap Helper
+ok
+test_direct_bake_freezes_existing_auto_guard_tangents (test_overlap.OverlapTests.test_direct_bake_freezes_existing_auto_guard_tangents) ... ok
+test_direct_bake_preserves_outside_integer_frames_and_surrounding_segments (test_overlap.OverlapTests.test_direct_bake_preserves_outside_integer_frames_and_surrounding_segments) ... ok
+test_direct_write_failure_rolls_back_original_keys (test_overlap.OverlapTests.test_direct_write_failure_rolls_back_original_keys) ... ����: Overlap Helper
+ok
+test_fractional_scale_does_not_rotate_a_static_unwrapped_pose (test_overlap.OverlapTests.test_fractional_scale_does_not_rotate_a_static_unwrapped_pose) ... ok
+test_hierarchy_uses_curve_controls_and_skips_offset_groups (test_overlap.OverlapTests.test_hierarchy_uses_curve_controls_and_skips_offset_groups) ... ok
+test_ignore_first_in_manual_selection_retains_remaining_controls (test_overlap.OverlapTests.test_ignore_first_in_manual_selection_retains_remaining_controls) ... ok
+test_ignore_first_retains_root_for_two_control_aim_inference (test_overlap.OverlapTests.test_ignore_first_retains_root_for_two_control_aim_inference) ... ok
+test_normal_rotation_requires_two_controls_in_both_modes (test_overlap.OverlapTests.test_normal_rotation_requires_two_controls_in_both_modes) ... ok
+test_scale_zero_is_rejected_without_changing_scene (test_overlap.OverlapTests.test_scale_zero_is_rejected_without_changing_scene) ... ok
+test_fractional_delay_interpolates_and_holds_start (test_solver.SolverTests.test_fractional_delay_interpolates_and_holds_start) ... ok
+test_loop_is_periodic_at_seam_and_has_no_startup_transient (test_solver.SolverTests.test_loop_is_periodic_at_seam_and_has_no_startup_transient) ... ok
+test_non_physics_softness_has_lag_without_overshoot (test_solver.SolverTests.test_non_physics_softness_has_lag_without_overshoot) ... ok
+test_rest_pose_does_not_drift (test_solver.SolverTests.test_rest_pose_does_not_drift) ... ok
+test_rotation_delay_uses_short_arc_across_antipodes (test_solver.SolverTests.test_rotation_delay_uses_short_arc_across_antipodes) ... ok
+test_short_loop_and_soft_spring_remain_finite (test_solver.SolverTests.test_short_loop_and_soft_spring_remain_finite) ... ok
+test_spring_overshoots_then_settles (test_solver.SolverTests.test_spring_overshoots_then_settles) ... ok
+test_translation_can_excite_rotational_swing (test_solver.SolverTests.test_translation_can_excite_rotational_swing) ... ok
+test_zero_strength_preserves_source (test_solver.SolverTests.test_zero_strength_preserves_source) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 6.403s
+
+OK
