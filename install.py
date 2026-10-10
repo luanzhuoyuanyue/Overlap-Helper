@@ -59,7 +59,7 @@ def install():
         if cmds.objectTypeUI(child) == 'shelfButton' and cmds.shelfButton(child, query=True, docTag=True) == 'OverlapMotion':
             existing = child
             break
-    options = dict(label='Overlap Helper', annotation='Overlap Helper | Overlap 页独立重写版',
+    options = dict(label='重叠动画助手', annotation='重叠动画助手 | 独立重写版',
                    image='pythonFamily.png', imageOverlayLabel='OH', sourceType='python',
                    command=command, docTag='OverlapMotion')
     if existing:
@@ -68,11 +68,11 @@ def install():
         cmds.shelfButton(parent=shelf, **options)
     import overlap_motion
     overlap_motion.show()
-    message = 'Overlap Helper 安装完成，工具架按钮为 OH。'
+    message = '重叠动画助手安装完成，工具架按钮为 OH。'
     if backup:
         message += '\n旧版本备份：' + str(backup)
     print(message)
-    cmds.inViewMessage(amg='Overlap Helper 安装完成 · 工具架 OH', pos='topCenter', fade=True)
+    cmds.inViewMessage(amg='重叠动画助手安装完成 · 工具架 OH', pos='topCenter', fade=True)
 
 
 def onMayaDroppedPythonFile(*_):

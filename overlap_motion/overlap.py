@@ -69,6 +69,40 @@ def _aims(nodes, start, custom, axes):
         cmds.currentTime(original_time)
 
 
+def _restore_state(original_time, selection, auto, evaluation_mode, playback, viewport_pause=None):
+    """Attempt every restoration even if another Maya command fails."""
+    errors = []
+
+    def restore_playback():
+        changed = {key: value for key, value in playback.items()
+                   if cmds.playbackOptions(query=True, **{key: True}) != value}
+        if changed:
+            cmds.playbackOptions(**changed)
+
+    actions = [
+        restore_playback,
+        lambda: (cmds.select(selection, replace=True) if selection else cmds.select(clear=True))
+        if (cmds.ls(selection=True, long=True) or []) != selection else None,
+        lambda: cmds.currentTime(original_time)
+        if cmds.currentTime(query=True) != original_time else None,
+        lambda: cmds.autoKeyframe(state=auto)
+        if cmds.autoKeyframe(query=True, state=True) != auto else None,
+        lambda: cmds.evaluationManager(mode=evaluation_mode)
+        if cmds.evaluationManager(query=True, mode=True)[0] != evaluation_mode else None,
+        # ogs(pause=True) toggles VP2 display updates; it is not a setter.
+        # Keep the caller's paused state, and leave batch rendering alone.
+        lambda: cmds.ogs(pause=True)
+        if viewport_pause is not None and
+        cmds.ogs(query=True, pause=True) != viewport_pause else None,
+    ]
+    for action in actions:
+        try:
+            action()
+        except BaseException as error:
+            errors.append(error)
+    return errors
+
+
 def create(rotation=True, custom=False, physics=False, axes=('X', 'Y', 'Z'),
            smoothness=3.0, scale=1.0, overshoot=10.0, ignore_first=False,
            hierarchy=False, loop=False, add_to_layer=True):
@@ -80,11 +114,11 @@ def create(rotation=True, custom=False, physics=False, axes=('X', 'Y', 'Z'),
     if not all(math.isfinite(v) for v in (smoothness, scale, overshoot)):
         raise ValueError('参数必须为有效数值。')
     if smoothness < 0.1 or scale < 0.1 or overshoot < 1:
-        raise ValueError('smoothness 最小 0.1，Scale 最小 0.1，Overshoot 最小 1。')
+        raise ValueError('平滑度最小 0.1，比例最小 0.1，回弹强度最小 1。')
     if not axes or any(axis not in ('X', 'Y', 'Z') for axis in axes):
-        raise ValueError('请至少勾选一个 Axis。')
+        raise ValueError('请至少勾选一个轴向。')
     if custom and not rotation:
-        raise ValueError('Cus 模式需要 Rotat。')
+        raise ValueError('自定义模式需要启用旋转。')
     roots = cmds.ls(selection=True, long=True, transforms=True) or []
     groups = [selected_controls(True, roots=[root]) for root in roots] if hierarchy else [selected_controls()]
     all_nodes = [n for group in groups for n in group]
@@ -94,9 +128,9 @@ def create(rotation=True, custom=False, physics=False, axes=('X', 'Y', 'Z'),
     start = cmds.playbackOptions(query=True, minTime=True)
     end = cmds.playbackOptions(query=True, maxTime=True)
     if rotation and not custom and any(len(group) < 2 for group in groups):
-        raise ValueError('普通 Rotat 模式需要至少两个控制器；单个控制器请使用 Cus。')
+        raise ValueError('普通旋转模式需要至少两个控制器；单个控制器请使用自定义模式。')
     if physics and not 2 <= smoothness <= 9:
-        raise ValueError('Physics 模式的 smoothness 范围为 2–9，默认值为 8。')
+        raise ValueError('物理解算模式的平滑度范围为 2–9，默认值为 8。')
     output_axes = ('X', 'Y', 'Z') if custom else axes
     attributes = [('rotate' if rotation else 'translate') + axis for axis in output_axes]
     writable = False
@@ -106,22 +140,27 @@ def create(rotation=True, custom=False, physics=False, axes=('X', 'Y', 'Z'),
             core._validate([node], start, end, unlocked, add_to_layer)
             writable = True
     if not writable:
-        raise ValueError('所选 Axis 通道均被锁定，无法生成动画。')
+        raise ValueError('所选轴向通道均被锁定，无法生成动画。')
     original_time = cmds.currentTime(query=True)
     selection = cmds.ls(selection=True, long=True) or []
     auto = cmds.autoKeyframe(query=True, state=True)
     evaluation_mode = cmds.evaluationManager(query=True, mode=True)[0]
     if loop and not add_to_layer:
-        raise ValueError('Loop 模式请启用 Add to Animation Layer。')
+        raise ValueError('循环模式请启用“添加到动画层”。')
     playback = {key: cmds.playbackOptions(query=True, **{key: True})
                 for key in ('minTime', 'maxTime', 'animationStartTime', 'animationEndTime')}
     bake_end = end + (end - start) if loop else end
     op = legacy.Overlap(start, bake_end, rotation, physics, smoothness, scale, overshoot,
                         output_axes, add_to_layer, ignore_first)
-    failed = False
+    viewport_pause = None if cmds.about(batch=True) else cmds.ogs(query=True, pause=True)
+    errors = []
+    closed = False
     cmds.undoInfo(openChunk=True, chunkName='Overlap Helper')
     try:
         cmds.autoKeyframe(state=False)
+        if viewport_pause is False:
+            # Pause only the viewport display so animation evaluation continues.
+            cmds.ogs(pause=True)
         # Explicit particle evaluation under DG is deterministic in both GUI
         # and mayapy. Parallel evaluation can leave particle goals stationary.
         if physics and evaluation_mode != 'off':
@@ -149,20 +188,57 @@ def create(rotation=True, custom=False, physics=False, axes=('X', 'Y', 'Z'),
                       cmds.animLayer(layer, query=True, animCurves=True) or []]
             cmds.keyframe(curves, relative=True, timeChange=-(end - start))
             cmds.cutKey(curves, clear=True, time=(start - (end - start), start - 1))
-        return op.layer
-    except Exception:
-        failed = True
-        raise
+    except BaseException as error:
+        errors.append(error)
     finally:
         try:
             op.cleanup()
-            cmds.playbackOptions(**playback)
-            cmds.select(selection, replace=True) if selection else cmds.select(clear=True)
-            cmds.currentTime(original_time)
-            cmds.autoKeyframe(state=auto)
-            if physics and cmds.evaluationManager(query=True, mode=True)[0] != evaluation_mode:
-                cmds.evaluationManager(mode=evaluation_mode)
+        except BaseException as error:
+            errors.append(error)
         finally:
-            cmds.undoInfo(closeChunk=True)
-            if failed:
+            errors.extend(_restore_state(original_time, selection, auto, evaluation_mode, playback,
+                                         viewport_pause))
+            try:
+                cmds.undoInfo(closeChunk=True)
+                closed = True
+            except BaseException as error:
+                errors.append(error)
+                try:
+                    cmds.undoInfo(closeChunk=True)
+                    closed = True
+                except BaseException as secondary:
+                    errors.append(secondary)
+    if errors:
+        if closed:
+            try:
                 cmds.undo()
+            except BaseException as error:
+                errors.append(error)
+        else:
+            errors.append(RuntimeError('Maya 无法关闭本次撤销块，未执行自动撤销。'))
+        # currentTime and evaluation mode are not restored by undo. Avoid
+        # adding recovery commands above the user's previous undo entry.
+        recording = True
+        try:
+            recording = cmds.undoInfo(query=True, state=True)
+            cmds.undoInfo(stateWithoutFlush=False)
+        except BaseException as error:
+            errors.append(error)
+            try:
+                cmds.undoInfo(stateWithoutFlush=False)
+            except BaseException as secondary:
+                errors.append(secondary)
+        try:
+            errors.extend(_restore_state(original_time, selection, auto, evaluation_mode, playback,
+                                         viewport_pause))
+        finally:
+            try:
+                cmds.undoInfo(stateWithoutFlush=recording)
+            except BaseException as error:
+                errors.append(error)
+        primary = errors[0]
+        for secondary in errors[1:]:
+            if hasattr(primary, 'add_note'):
+                primary.add_note('恢复场景时同时发生：' + repr(secondary))
+        raise primary.with_traceback(primary.__traceback__)
+    return op.layer

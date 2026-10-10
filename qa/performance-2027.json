@@ -1,0 +1,100 @@
+{
+  "maya": "2027",
+  "batch": true,
+  "controls": 24,
+  "frames": 121,
+  "repeats": 3,
+  "bent_chain": true,
+  "evaluation_mode": "parallel (physics temporarily uses DG)",
+  "timer": "create only; setup/startup/sampling excluded",
+  "cases": [
+    {
+      "case": "offset-rotation",
+      "seconds": {
+        "baseline": [
+          17.792852299986407,
+          24.588302900083363,
+          21.670527399983257
+        ],
+        "optimized": [
+          12.024534499971196,
+          8.85153550002724,
+          9.540692399954423
+        ]
+      },
+      "median_seconds": {
+        "baseline": 21.670527399983257,
+        "optimized": 9.540692399954423
+      },
+      "speedup": 2.2713788990919337,
+      "maximum_channel_error": 0.0,
+      "checked_runs": 6
+    },
+    {
+      "case": "offset-translation",
+      "seconds": {
+        "baseline": [
+          17.124482499901205,
+          17.42621559998952,
+          16.469254900002852
+        ],
+        "optimized": [
+          5.546224700054154,
+          5.883575600106269,
+          6.195075999945402
+        ]
+      },
+      "median_seconds": {
+        "baseline": 17.124482499901205,
+        "optimized": 5.883575600106269
+      },
+      "speedup": 2.9105570598246246,
+      "maximum_channel_error": 3.979039320256561e-13,
+      "checked_runs": 6
+    },
+    {
+      "case": "physics-rotation",
+      "seconds": {
+        "baseline": [
+          9.614710400113836,
+          9.423124100081623,
+          9.19301909999922
+        ],
+        "optimized": [
+          10.198799400124699,
+          8.590784300118685,
+          11.506527400109917
+        ]
+      },
+      "median_seconds": {
+        "baseline": 9.423124100081623,
+        "optimized": 10.198799400124699
+      },
+      "speedup": 0.9239444497718435,
+      "maximum_channel_error": 0.0,
+      "checked_runs": 6
+    },
+    {
+      "case": "physics-translation",
+      "seconds": {
+        "baseline": [
+          10.027314600069076,
+          9.708046399988234,
+          12.997018200112507
+        ],
+        "optimized": [
+          8.416653799824417,
+          8.230222299927846,
+          11.575396200176328
+        ]
+      },
+      "median_seconds": {
+        "baseline": 10.027314600069076,
+        "optimized": 8.416653799824417
+      },
+      "speedup": 1.1913659321805847,
+      "maximum_channel_error": 1.4210854715202004e-13,
+      "checked_runs": 6
+    }
+  ]
+}

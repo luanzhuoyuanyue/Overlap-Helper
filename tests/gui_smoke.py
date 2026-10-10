@@ -17,14 +17,16 @@ from PySide6 import QtCore, QtWidgets
 
 def run():
     version = cmds.about(version=True)
-    report = {'maya': version, 'passed': False, 'checks': []}
+    from overlap_motion import __version__
+    report = {'maya': version, 'plugin_version': __version__, 'passed': False, 'checks': []}
     try:
-        suite = unittest.defaultTestLoader.loadTestsFromNames(['ui_checks', 'test_maya2023_parity'])
+        suite = unittest.defaultTestLoader.loadTestsFromNames(
+            ['ui_checks', 'test_maya2023_parity', 'test_stability', 'viewport_checks.ViewportTests'])
         stream = io.StringIO()
         result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
         report['tests'] = stream.getvalue()
         assert result.wasSuccessful(), stream.getvalue()
-        report['checks'].append('2023 UI states, 23 golden motion cases, undo and existing dynamics')
+        report['checks'].append('2023 UI states, 23 golden motion cases, undo, existing dynamics, 7 recovery faults and 6 viewport pause/recovery checks')
         from overlap_motion import ui
         from test_maya2023_parity import reference_scene, Maya2023ParityTests
         for rotation in (True, False):
@@ -43,7 +45,7 @@ def run():
                     for node, expected in zip(nodes, controls):
                         actual = list(cmds.getAttr(node + '.translate')[0]) + list(cmds.getAttr(node + '.rotate')[0])
                         assert max(abs(a-b) for a,b in zip(actual,expected)) < 1e-4, case
-        report['checks'].append('real Create button matches all four original mode trajectories')
+        report['checks'].append('real Chinese generate button matches all four original mode trajectories')
         spec = importlib.util.spec_from_file_location('om_installer', ROOT / 'install.py')
         installer = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(installer)

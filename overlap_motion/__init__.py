@@ -1,6 +1,6 @@
 """An independent implementation of the Overlap Helper Overlap page."""
 
-__version__ = '1.2.0'
+__version__ = '1.3.1'
 
 
 def show():

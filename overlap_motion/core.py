@@ -28,7 +28,7 @@ def _validate(nodes, start, end, attributes, add_to_layer=True):
     if not attributes:
         raise ValueError('请至少启用旋转或位移。')
     if not cmds.undoInfo(query=True, state=True):
-        raise ValueError('请先在 Maya 首选项中启用 Undo，再生成动画。')
+        raise ValueError('请先在 Maya 首选项中启用撤销，再生成动画。')
     solo_layers = [layer for layer in cmds.ls(type='animLayer') or []
                    if cmds.animLayer(layer, query=True, solo=True)]
     if solo_layers:
@@ -51,7 +51,7 @@ def _validate(nodes, start, end, attributes, add_to_layer=True):
                 if not (kind.startswith('animCurveT') or kind.startswith('animBlendNode')):
                     raise ValueError('通道被约束、表达式或其他节点驱动：' + plug)
                 if not add_to_layer and kind.startswith('animBlendNode'):
-                    raise ValueError('已有动画层的通道请启用 Add to Animation Layer：' + plug)
+                    raise ValueError('已有动画层的通道请启用“添加到动画层”：' + plug)
         result.append(node)
     return result
 
@@ -117,7 +117,7 @@ def bake(nodes, start, end, mode='spring', delay=2.0, stagger=1.0, response=12.0
     if axis not in AXES:
         raise ValueError('摆动轴必须为 X、Y、Z 或它们的负方向。')
     if not math.isfinite(amplitude) or not 0 <= amplitude <= 10:
-        raise ValueError('Scale 必须在 0–10 之间。')
+        raise ValueError('比例必须在 0–10 之间。')
     # Validate numerical solver options before any scene mutation.
     solver.solve([(0, 0, 0)] * 2, [(0, 0, 0, 1)] * 2, delay=delay,
                  mode=mode, response=response, damping=damping, strength=strength,
@@ -133,7 +133,7 @@ def bake(nodes, start, end, mode='spring', delay=2.0, stagger=1.0, response=12.0
                     for layer in cmds.ls(type='animLayer') or []}
     interactive = not cmds.about(batch=True)
     if interactive:
-        cmds.progressWindow(title='Overlap Helper', progress=0, maxValue=100,
+        cmds.progressWindow(title='重叠动画助手', progress=0, maxValue=100,
                             status='采样原动画…', isInterruptable=True)
     layer = None
     temporary = []

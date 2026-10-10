@@ -21,6 +21,6 @@ jobs:
           python tools/build_release.py
           python -c 'import os; from tools.build_release import version; assert os.environ["GITHUB_REF_NAME"] == "v"+version'
       - name: 创建中文 Release 并上传 ZIP
-        run: gh release create "$GITHUB_REF_NAME" dist/*.zip --verify-tag --title "Overlap Helper $GITHUB_REF_NAME：原版对照适配与纯 AI 声明" --notes-file release-notes.md
+        run: gh release create "$GITHUB_REF_NAME" dist/*.zip --verify-tag --title "Overlap Helper $GITHUB_REF_NAME：计算提速与稳定性优化" --notes-file release-notes.md
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

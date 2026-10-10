@@ -24,7 +24,7 @@ class Overlap:
         locs = [self.locator('chain') for _ in range(len(nodes) + 1)]
         cmds.setAttr(locs[0] + '.visibility', False)
         for i in range(len(nodes)):
-            cmds.parent(locs[i + 1:], locs[i])
+            cmds.parent(locs[i + 1], locs[i])
         for i, node in enumerate(nodes):
             cmds.matchTransform(locs[i], node, position=True)
             if i + 1 < len(nodes):
@@ -87,8 +87,11 @@ class Overlap:
                 safe_attributes.append(attribute)
         if safe_attributes:
             cmds.setKeyframe(control, time=self.start, attribute=safe_attributes)
-        cmds.bakeResults(goal, simulation=False, time=(self.start, self.end),
-                         minimizeRotation=False, shape=False)
+        # Evaluate the scene once per frame, rather than once per attribute.
+        # Translation also needs the goal rotation for maintainOffset.
+        cmds.bakeResults(goal, simulation=True, time=(self.start, self.end),
+                         minimizeRotation=False, shape=False,
+                         attribute=['tx', 'ty', 'tz', 'rx', 'ry', 'rz'])
         cmds.delete(goal, constraints=True)
         for attribute, delay in [('translate', self.delay)] + (
                 [('rotate', self.delay * self.scale)] if self.rotation else []):
@@ -128,14 +131,13 @@ class Overlap:
             copy = cmds.duplicate(node, parentOnly=True,
                                   name='overlapHelperTemp_copy#')[0]
             self.temporary.append(copy)
-            for attribute in attributes:
-                others = tuple(a.lower() for a in 'XYZ' if a != attribute[-1])
-                cmds.parentConstraint(driver, copy, maintainOffset=True,
-                                      skipTranslate=('x', 'y', 'z') if self.rotation else others,
-                                      skipRotate=others if self.rotation else ('x', 'y', 'z'))
+            others = tuple(a.lower() for a in 'XYZ' if
+                           ('rotate' if self.rotation else 'translate') + a not in attributes)
+            cmds.parentConstraint(driver, copy, maintainOffset=True,
+                                  skipTranslate=('x', 'y', 'z') if self.rotation else others or 'none',
+                                  skipRotate=(others or 'none') if self.rotation else ('x', 'y', 'z'))
             cmds.bakeResults(copy, time=(self.start, self.end), simulation=True,
-                             attribute=['rotateX', 'rotateY', 'rotateZ'] if self.rotation
-                             else ['translateX', 'translateY', 'translateZ'])
+                             attribute=attributes, shape=False)
             if self.layer:
                 cmds.animLayer(self.layer, edit=True,
                                attribute=[node + '.' + attr for attr in attributes])
